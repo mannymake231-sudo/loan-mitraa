@@ -1,0 +1,3432 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Mitra - Digital Loan Platform</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        :root {
+            --primary: #1a237e;
+            --secondary: #ff6f00;
+            --success: #4caf50;
+            --info: #2196f3;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --light: #f5f5f5;
+            --dark: #212121;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .main-header {
+            background: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .logo-text span {
+            color: var(--secondary);
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            padding: 8px 0;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .header-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .header-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        /* HERO SECTION */
+        .hero-section {
+            background: linear-gradient(rgba(26, 35, 126, 0.9), rgba(26, 35, 126, 0.95)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 5%;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            min-width: 200px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* LOAN CARDS SECTION */
+        .section-title {
+            text-align: center;
+            padding: 60px 5% 30px;
+            background: white;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .loan-cards-container {
+            background: white;
+            padding: 0 5% 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .loan-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .loan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: var(--primary);
+        }
+        
+        .loan-card-header {
+            background: var(--primary);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .loan-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .loan-card-content {
+            padding: 25px;
+        }
+        
+        .loan-amount {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .loan-rate {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .loan-features {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .loan-features li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .loan-features li:before {
+            content: "✓";
+            color: var(--success);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        /* LOAN DETAIL MODAL */
+        .loan-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlide 0.3s;
+        }
+        
+        @keyframes modalSlide {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .loan-info-section {
+            margin-bottom: 30px;
+        }
+        
+        .info-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .info-item {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        /* EMI CALCULATOR */
+        .calculator-section {
+            background: white;
+            padding: 60px 5%;
+        }
+        
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .slider-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .emi-display {
+            background: linear-gradient(135deg, var(--primary), #303f9f);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .emi-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 20px 0;
+            color: var(--secondary);
+        }
+        
+        .emi-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .detail-box {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        /* APPLICATION FORM */
+        .form-section {
+            background: white;
+            padding: 60px 5%;
+        }
+        
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .form-steps::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #666;
+            margin: 0 auto 10px;
+            transition: all 0.3s;
+        }
+        
+        .step.active .step-number {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background: var(--success);
+            color: white;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-field {
+            position: relative;
+        }
+        
+        .field-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .field-label.required::after {
+            content: ' *';
+            color: var(--danger);
+        }
+        
+        .field-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .field-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+        
+        .validation-message {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .valid .validation-message.success {
+            display: block;
+            color: var(--success);
+        }
+        
+        .invalid .validation-message.error {
+            display: block;
+            color: var(--danger);
+        }
+        
+        /* FORM ACTIONS */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0d1a6b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: var(--dark);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        /* FOOTER */
+        .main-footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        /* WHATSAPP FLOAT */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(37,211,102,0.3);
+        }
+        
+        /* BANK & NBFC CARDS */
+        .banks-section {
+            background: white;
+            padding: 60px 5%;
+        }
+        
+        .banks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .bank-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bank-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: var(--primary);
+        }
+        
+        .bank-card.govt:hover {
+            border-color: #1a237e;
+            box-shadow: 0 15px 30px rgba(26, 35, 126, 0.2);
+        }
+        
+        .bank-card.nbfc:hover {
+            border-color: #ff6f00;
+            box-shadow: 0 15px 30px rgba(255, 111, 0, 0.2);
+        }
+        
+        .logo-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bank-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            padding: 15px;
+            background: white;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+        
+        .govt-logo {
+            border: 3px solid #1a237e;
+            background: linear-gradient(145deg, #ffffff, #f0f4ff);
+            box-shadow: 0 4px 12px rgba(26, 35, 126, 0.1);
+        }
+        
+        .govt-logo:hover {
+            transform: scale(1.18) translateY(-8px);
+            box-shadow: 
+                0 15px 35px rgba(26, 35, 126, 0.25),
+                0 0 0 2px #ff6f00;
+            border-color: #1a237e;
+        }
+        
+        .nbfc-logo {
+            border: 3px solid #ff6f00;
+            background: white;
+            box-shadow: 0 4px 15px rgba(255, 111, 0, 0.15);
+        }
+        
+        .nbfc-logo:hover {
+            transform: scale(1.18) translateY(-8px);
+            box-shadow: 
+                0 15px 35px rgba(255, 111, 0, 0.25),
+                0 0 0 2px #1a237e;
+            border-color: #ff6f00;
+        }
+        
+        .bank-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .govt-badge {
+            background: #1a237e;
+            color: white;
+            box-shadow: 0 3px 10px rgba(26, 35, 126, 0.3);
+        }
+        
+        .nbfc-badge {
+            background: #ff6f00;
+            color: white;
+            box-shadow: 0 3px 10px rgba(255, 111, 0, 0.3);
+        }
+        
+        .bank-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .bank-type {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .bank-features {
+            list-style: none;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .bank-features li {
+            padding: 5px 0;
+            font-size: 0.9rem;
+        }
+        
+        .bank-features li:before {
+            content: "✓";
+            color: var(--success);
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        .bank-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* ADMIN PANEL STYLES */
+        .admin-login-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admin-login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .admin-panel-section {
+            display: none;
+            padding: 20px 5%;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .admin-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .leads-table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .leads-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .leads-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .leads-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-new {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status-pending {
+            background: #fff3e0;
+            color: #ff9800;
+        }
+        
+        .status-approved {
+            background: #e8f5e9;
+            color: #4caf50;
+        }
+        
+        .status-rejected {
+            background: #ffebee;
+            color: #f44336;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .admin-filters {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .admin-filter-input {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            min-width: 200px;
+        }
+        
+        /* FILTERS SECTION */
+        .filters-section {
+            background: white;
+            padding: 20px 5%;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .filters-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .filter-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .banks-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .banks-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .main-nav {
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px;
+            }
+            
+            .main-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .emi-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .form-steps {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            
+            .step {
+                flex: 1;
+                min-width: 100px;
+            }
+            
+            .leads-table {
+                font-size: 0.9rem;
+            }
+            
+            .leads-table th,
+            .leads-table td {
+                padding: 8px 10px;
+            }
+            
+            .admin-filters {
+                flex-direction: column;
+            }
+            
+            .admin-filter-input {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .banks-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .logo-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .bank-logo:hover {
+                transform: scale(1.12) translateY(-5px);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .loan-cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-container {
+                padding: 20px;
+            }
+            
+            .banks-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .bank-logo {
+                padding: 10px;
+            }
+        }
+    </style>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    
+</head>
+<body>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/919352665561" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Admin Login Section -->
+<div class="admin-login-section" id="adminLoginSection">
+    <div class="admin-login-box">
+        <h2 style="color: var(--primary); margin-bottom: 20px;">Admin Login</h2>
+        <p style="color: #666; margin-bottom: 30px;">Enter admin password to access lead database</p>
+        
+        <div style="margin-bottom: 25px;">
+            <input type="password" id="adminPassword" class="field-input" placeholder="Enter admin password" 
+                   style="width: 100%; padding: 15px; font-size: 1.1rem;">
+        </div>
+        
+        <button class="btn btn-primary" onclick="adminLogin()" style="width: 100%;">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        
+        <button class="btn btn-secondary" onclick="closeAdminLogin()" 
+                style="width: 100%; margin-top: 15px;">
+            <i class="fas fa-times"></i> Cancel
+        </button>
+        
+        <p style="margin-top: 20px; color: #888; font-size: 0.9rem;">
+            Default password: admin123<br>
+            <small>You can change password in code</small>
+        </p>
+    </div>
+</div>
+
+<!-- Admin Panel Section -->
+<section class="admin-panel-section" id="adminPanel">
+    <div class="admin-header">
+        <div>
+            <h2><i class="fas fa-cogs"></i> Admin Panel</h2>
+            <p>Manage all loan applications and leads</p>
+        </div>
+        <div>
+            <span id="adminWelcome">Welcome, Admin</span>
+        </div>
+    </div>
+    
+    <!-- Back to Website Button -->
+    <div style="margin-bottom: 20px;">
+        <button class="btn btn-success" onclick="backToWebsite()">
+            <i class="fas fa-arrow-left"></i> Back to Website
+        </button>
+    </div>
+    
+    <!-- Dashboard -->
+    <div id="adminDashboard">
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="feature-icon">📊</div>
+                <div class="stat-number" id="totalLeadsCount">0</div>
+                <p>Total Leads</p>
+            </div>
+            
+            <div class="stat-card">
+                <div class="feature-icon">⏳</div>
+                <div class="stat-number" id="pendingLeadsCount">0</div>
+                <p>Pending Leads</p>
+            </div>
+            
+            <div class="stat-card">
+                <div class="feature-icon">✅</div>
+                <div class="stat-number" id="approvedLeadsCount">0</div>
+                <p>Approved Leads</p>
+            </div>
+            
+            <div class="stat-card">
+                <div class="feature-icon">🏦</div>
+                <div class="stat-number" id="govtLeadsCount">0</div>
+                <p>Govt Bank Leads</p>
+            </div>
+            
+            <div class="stat-card">
+                <div class="feature-icon">💼</div>
+                <div class="stat-number" id="nbfcLeadsCount">0</div>
+                <p>NBFC Leads</p>
+            </div>
+            
+            <div class="stat-card">
+                <div class="feature-icon">💼</div>
+                <div class="stat-number" id="businessLeadsCount">0</div>
+                <p>Business Loans</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px;">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">Quick Actions</h3>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="showAdminLeads()">
+                    <i class="fas fa-eye"></i> View All Leads
+                </button>
+                <button class="btn btn-success" onclick="exportAllLeads()">
+                    <i class="fas fa-file-excel"></i> Export to CSV
+                </button>
+                <button class="btn btn-warning" onclick="showRecentLeads()">
+                    <i class="fas fa-clock"></i> Recent Leads
+                </button>
+                <button class="btn btn-danger" onclick="clearAllLeads()">
+                    <i class="fas fa-trash"></i> Clear All Data
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Leads Management -->
+    <div id="adminLeads" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="color: var(--primary);">All Loan Applications</h3>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-success" onclick="exportAllLeads()">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+                <button class="btn btn-primary" onclick="refreshLeads()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <button class="btn btn-secondary" onclick="showAdminDashboard()">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </button>
+            </div>
+        </div>
+        
+        <div class="admin-filters">
+            <input type="text" id="searchLeads" class="admin-filter-input" placeholder="Search by name or mobile..." 
+                   onkeyup="filterLeads()">
+            <select id="filterStatus" class="admin-filter-input" onchange="filterLeads()">
+                <option value="">All Status</option>
+                <option value="New">New</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+            <select id="filterLoanType" class="admin-filter-input" onchange="filterLeads()">
+                <option value="">All Loan Types</option>
+                <option value="Home Loan">Home Loan</option>
+                <option value="Personal Loan">Personal Loan</option>
+                <option value="Business Loan">Business Loan</option>
+                <option value="Vehicle Loan">Vehicle Loan</option>
+            </select>
+            <select id="filterBankType" class="admin-filter-input" onchange="filterLeads()">
+                <option value="">All Bank Types</option>
+                <option value="Government Bank">Government Bank</option>
+                <option value="NBFC">NBFC</option>
+            </select>
+        </div>
+        
+        <div class="leads-table-container">
+            <div id="leadsTableContainer">
+                <!-- Leads table will be loaded here -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN WEBSITE CONTENT -->
+<div id="mainWebsite">
+
+<!-- HEADER -->
+<header class="main-header">
+    <div class="logo">
+        <div class="logo-icon">🏦</div>
+        <div class="logo-text">LOAN <span>MITRA</span></div>
+    </div>
+    
+    <nav class="main-nav">
+        <a class="nav-link active" onclick="showSection('home')">Home</a>
+        <a class="nav-link" onclick="showSection('loans')">Loan Types</a>
+        <a class="nav-link" onclick="showSection('govt-banks')">Govt Schemes</a>
+        <a class="nav-link" onclick="showSection('nbfc-loans')">NBFC Loans</a>
+        <a class="nav-link" onclick="showSection('calculator')">EMI Calculator</a>
+        <a class="nav-link" onclick="showSection('apply')">Apply Now</a>
+        <a class="nav-link" onclick="openAdminLogin()">Admin</a>
+    </nav>
+    
+    <button class="header-btn" onclick="showSection('apply')">Apply Now</button>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero-section" id="home">
+    <h1 class="hero-title">INSTANT LOAN APPROVAL IN 5 MINUTES</h1>
+    <p class="hero-subtitle">Get instant loans up to ₹50 lakhs with minimal documentation. 100% digital process with lowest interest rates.</p>
+    
+    <div class="hero-features">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Quick Processing</h3>
+            <p>Approval within 5 minutes</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📄</div>
+            <h3>Paperless</h3>
+            <p>Zero paperwork required</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>No Hidden Charges</h3>
+            <p>Transparent pricing</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Safe & Secure</h3>
+            <p>Bank-level security</p>
+        </div>
+    </div>
+</section>
+
+<!-- LOAN TYPES SECTION -->
+<div class="section-title" id="loans">
+    <h2>Our Loan Services</h2>
+    <p>Choose from our wide range of loan products</p>
+</div>
+
+<div class="loan-cards-container">
+    <!-- Home Loan Card -->
+    <div class="loan-card" onclick="showLoanDetails('home')">
+        <div class="loan-card-header">
+            <div class="loan-icon">🏠</div>
+            <h3>Home Loan</h3>
+        </div>
+        <div class="loan-card-content">
+            <div class="loan-amount">Up to ₹5 Crores</div>
+            <div class="loan-rate">Interest: 8.4% - 9.5%</div>
+            <ul class="loan-features">
+                <li>Lowest interest rates</li>
+                <li>Up to 30 years tenure</li>
+                <li>Balance transfer facility</li>
+                <li>Top-up loan available</li>
+            </ul>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="showLoanDetails('home')">
+                <i class="fas fa-info-circle"></i> Learn More
+            </button>
+        </div>
+    </div>
+    
+    <!-- Personal Loan Card -->
+    <div class="loan-card" onclick="showLoanDetails('personal')">
+        <div class="loan-card-header">
+            <div class="loan-icon">👤</div>
+            <h3>Personal Loan</h3>
+        </div>
+        <div class="loan-card-content">
+            <div class="loan-amount">Up to ₹25 Lakhs</div>
+            <div class="loan-rate">Interest: 10.5% - 16%</div>
+            <ul class="loan-features">
+                <li>Instant approval</li>
+                <li>No security required</li>
+                <li>End-use flexibility</li>
+                <li>Online process</li>
+            </ul>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="showLoanDetails('personal')">
+                <i class="fas fa-info-circle"></i> Learn More
+            </button>
+        </div>
+    </div>
+    
+    <!-- Business Loan Card -->
+    <div class="loan-card" onclick="showLoanDetails('business')">
+        <div class="loan-card-header">
+            <div class="loan-icon">💼</div>
+            <h3>Business Loan</h3>
+        </div>
+        <div class="loan-card-content">
+            <div class="loan-amount">Up to ₹50 Lakhs</div>
+            <div class="loan-rate">Interest: 11% - 16%</div>
+            <ul class="loan-features">
+                <li>Collateral free</li>
+                <li>Quick disbursal</li>
+                <li>Flexible repayment</li>
+                <li>Minimal documentation</li>
+            </ul>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="showLoanDetails('business')">
+                <i class="fas fa-info-circle"></i> Learn More
+            </button>
+        </div>
+    </div>
+    
+    <!-- Vehicle Loan Card -->
+    <div class="loan-card" onclick="showLoanDetails('vehicle')">
+        <div class="loan-card-header">
+            <div class="loan-icon">🚗</div>
+            <h3>Vehicle Loan</h3>
+        </div>
+        <div class="loan-card-content">
+            <div class="loan-amount">Up to ₹30 Lakhs</div>
+            <div class="loan-rate">Interest: 8.5% - 10.5%</div>
+            <ul class="loan-features">
+                <li>100% finance</li>
+                <li>Quick processing</li>
+                <li>Low EMI options</li>
+                <li>Insurance bundled</li>
+            </ul>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="showLoanDetails('vehicle')">
+                <i class="fas fa-info-circle"></i> Learn More
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- GOVERNMENT BANKS SECTION -->
+<section class="banks-section" id="govt-banks" style="display: none;">
+    <div class="section-title">
+        <h2>Government Loan Schemes</h2>
+        <p>Apply with trusted government banks and schemes</p>
+    </div>
+    
+    <!-- Filters -->
+    <div class="filters-section">
+        <div class="filters-container">
+            <button class="filter-btn active" onclick="filterBanks('all')">All Banks</button>
+            <button class="filter-btn" onclick="filterBanks('home')">Home Loans</button>
+            <button class="filter-btn" onclick="filterBanks('personal')">Personal Loans</button>
+            <button class="filter-btn" onclick="filterBanks('business')">Business Loans</button>
+            <button class="filter-btn" onclick="filterBanks('vehicle')">Vehicle Loans</button>
+        </div>
+    </div>
+    
+    <div class="banks-container" id="govtBanksContainer">
+        <!-- Government banks will be loaded here by JavaScript -->
+    </div>
+</section>
+
+<!-- NBFC LOANS SECTION -->
+<section class="banks-section" id="nbfc-loans" style="display: none;">
+    <div class="section-title">
+        <h2>NBFC Loans</h2>
+        <p>Fast processing with leading NBFCs</p>
+    </div>
+    
+    <!-- Filters -->
+    <div class="filters-section">
+        <div class="filters-container">
+            <button class="filter-btn active" onclick="filterNBFCs('all')">All NBFCs</button>
+            <button class="filter-btn" onclick="filterNBFCs('home')">Home Loans</button>
+            <button class="filter-btn" onclick="filterNBFCs('personal')">Personal Loans</button>
+            <button class="filter-btn" onclick="filterNBFCs('business')">Business Loans</button>
+            <button class="filter-btn" onclick="filterNBFCs('vehicle')">Vehicle Loans</button>
+            <button class="filter-btn" onclick="filterNBFCs('gold')">Gold Loans</button>
+            <button class="filter-btn" onclick="filterNBFCs('fast')">Fast Approval</button>
+        </div>
+    </div>
+    
+    <div class="banks-container" id="nbfcBanksContainer">
+        <!-- NBFCs will be loaded here by JavaScript -->
+    </div>
+</section>
+
+<!-- LOAN DETAIL MODALS -->
+<!-- Home Loan Modal -->
+<div class="loan-modal" id="homeLoanModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeLoanModal()">&times;</button>
+        <div class="modal-header">
+            <div style="font-size: 3rem; margin-bottom: 15px;">🏠</div>
+            <h2 style="font-size: 2rem;">Home Loan - Complete Information</h2>
+        </div>
+        <div class="modal-body">
+            <div class="loan-info-section">
+                <h3 class="info-title">What is Home Loan?</h3>
+                <p>A home loan is a secured loan offered by financial institutions to purchase or construct a house. The property being purchased serves as collateral for the loan.</p>
+            </div>
+            
+            <div class="loan-info-section">
+                <h3 class="info-title">Why Take Home Loan?</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>🏡 Home Ownership</h4>
+                        <p>Become a homeowner without waiting years to save the entire amount</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>💰 Tax Benefits</h4>
+                        <p>Section 80C: ₹1.5L deduction on principal, Section 24: ₹2L on interest</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>📈 Investment</h4>
+                        <p>Real estate appreciates over time, building your net worth</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="loan-info-section">
+                <h3 class="info-title">Eligibility Criteria</h3>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>Age: 21-65 years</li>
+                    <li>Income: Minimum ₹25,000 monthly</li>
+                    <li>Work Experience: 2+ years for salaried</li>
+                    <li>ITR: Last 2-3 years for self-employed</li>
+                    <li>Credit Score: 750+ preferred</li>
+                </ul>
+            </div>
+            
+            <div class="loan-info-section">
+                <h3 class="info-title">Documents Required</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>📋 Identity Proof</h4>
+                        <p>PAN Card, Aadhaar Card, Passport, Driving License</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>💼 Income Proof</h4>
+                        <p>Salary slips (3 months), Form 16, Bank statements (6 months)</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>🏠 Property Documents</h4>
+                        <p>Sale deed, NOC, Approved plan, Property tax receipts</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;" onclick="startHomeLoanApplication()">
+                    <i class="fas fa-file-signature"></i> Apply for Home Loan
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Personal Loan Modal -->
+<div class="loan-modal" id="personalLoanModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeLoanModal()">&times;</button>
+        <div class="modal-header">
+            <div style="font-size: 3rem; margin-bottom: 15px;">👤</div>
+            <h2 style="font-size: 2rem;">Personal Loan - Complete Information</h2>
+        </div>
+        <div class="modal-body">
+            <div class="loan-info-section">
+                <h3 class="info-title">What is Personal Loan?</h3>
+                <p>An unsecured loan offered without any collateral for various personal needs like medical emergencies, weddings, travel, or debt consolidation.</p>
+            </div>
+            
+            <div class="loan-info-section">
+                <h3 class="info-title">Common Uses</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>🏥 Medical Emergency</h4>
+                        <p>Immediate funds for hospitalization and treatment</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>💍 Wedding</h4>
+                        <p>Fund wedding expenses without draining savings</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>✈️ Travel</h4>
+                        <p>Finance your dream vacation or family trip</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>💰 Debt Consolidation</h4>
+                        <p>Combine multiple debts into one easy payment</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;" onclick="startPersonalLoanApplication()">
+                    <i class="fas fa-file-signature"></i> Apply for Personal Loan
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Business Loan Modal -->
+<div class="loan-modal" id="businessLoanModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeLoanModal()">&times;</button>
+        <div class="modal-header">
+            <div style="font-size: 3rem; margin-bottom: 15px;">💼</div>
+            <h2 style="font-size: 2rem;">Business Loan - Complete Information</h2>
+        </div>
+        <div class="modal-body">
+            <div class="loan-info-section">
+                <h3 class="info-title">What is Business Loan?</h3>
+                <p>A business loan provides funds to start, run, or expand your business. Can be secured or unsecured based on amount and business profile.</p>
+            </div>
+            
+            <div class="loan-info-section">
+                <h3 class="info-title">Types of Business Loans</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>🏢 Term Loan</h4>
+                        <p>Lump sum amount for business expansion or capital expenditure</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>💳 Working Capital</h4>
+                        <p>For daily operations, inventory, payroll, and other short-term needs</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>📈 Equipment Finance</h4>
+                        <p>To purchase machinery, vehicles, or business equipment</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>🏪 MSME Loan</h4>
+                        <p>Special schemes for Micro, Small & Medium Enterprises</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;" onclick="startBusinessLoanApplication()">
+                    <i class="fas fa-file-signature"></i> Apply for Business Loan
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vehicle Loan Modal -->
+<div class="loan-modal" id="vehicleLoanModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeLoanModal()">&times;</button>
+        <div class="modal-header">
+            <div style="font-size: 3rem; margin-bottom: 15px;">🚗</div>
+            <h2 style="font-size: 2rem;">Vehicle Loan - Complete Information</h2>
+        </div>
+        <div class="modal-body">
+            <div class="loan-info-section">
+                <h3 class="info-title">What is Vehicle Loan?</h3>
+                <p>A loan specifically designed to finance the purchase of new or used cars, bikes, or commercial vehicles. The vehicle serves as collateral.</p>
+            </div>
+            
+            <div class="loan-info-section">
+                <h3 class="info-title">Types of Vehicles Covered</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>🚘 New Car</h4>
+                        <p>Financing for brand new cars with maximum loan-to-value ratio</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>🚙 Used Car</h4>
+                        <p>Loans for pre-owned cars (typically up to 5 years old)</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>🏍️ Two-Wheeler</h4>
+                        <p>For motorcycles, scooters, and electric two-wheelers</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>🚚 Commercial Vehicle</h4>
+                        <p>For trucks, tempos, taxis, and other commercial vehicles</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;" onclick="startVehicleLoanApplication()">
+                    <i class="fas fa-file-signature"></i> Apply for Vehicle Loan
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EMI CALCULATOR SECTION -->
+<section class="calculator-section" id="calculator">
+    <div class="section-title">
+        <h2>Smart EMI Calculator</h2>
+        <p>Calculate your monthly EMI instantly</p>
+    </div>
+    
+    <div class="calculator-container">
+        <div class="input-group">
+            <label class="input-label">Loan Amount (₹)</label>
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span>₹50,000</span>
+                    <span id="loanAmountValue">₹10,00,000</span>
+                    <span>₹50,00,000</span>
+                </div>
+                <input type="range" id="loanAmountSlider" min="50000" max="5000000" value="1000000" step="50000" oninput="updateEMICalculator()">
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label class="input-label">Interest Rate (%)</label>
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span>5%</span>
+                    <span id="interestRateValue">9.5%</span>
+                    <span>20%</span>
+                </div>
+                <input type="range" id="interestRateSlider" min="5" max="20" value="9.5" step="0.1" oninput="updateEMICalculator()">
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label class="input-label">Loan Tenure (Years)</label>
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span>1 Year</span>
+                    <span id="tenureValue">10 Years</span>
+                    <span>30 Years</span>
+                </div>
+                <input type="range" id="tenureSlider" min="1" max="30" value="10" step="1" oninput="updateEMICalculator()">
+            </div>
+        </div>
+        
+        <div class="emi-display">
+            <p>Your Monthly EMI</p>
+            <div class="emi-amount" id="emiAmount">₹12,933</div>
+            
+            <div class="emi-details">
+                <div class="detail-box">
+                    <p>Total Interest</p>
+                    <h4 id="totalInterest">₹5,52,000</h4>
+                </div>
+                <div class="detail-box">
+                    <p>Total Payment</p>
+                    <h4 id="totalPayment">₹15,52,000</h4>
+                </div>
+                <div class="detail-box">
+                    <p>Loan Amount</p>
+                    <h4 id="displayLoanAmount">₹10,00,000</h4>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" style="margin-top: 30px; background: var(--secondary);" onclick="showSection('apply')">
+                <i class="fas fa-paper-plane"></i> Apply with this Calculation
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- APPLICATION FORM SECTION -->
+<section class="form-section" id="apply">
+    <div class="section-title">
+        <h2>Digital Loan Application</h2>
+        <p>Complete the form below to apply for loan</p>
+    </div>
+    
+    <div class="form-container">
+        <!-- Form Steps -->
+        <div class="form-steps">
+            <div class="step active" id="step1Indicator">
+                <div class="step-number">1</div>
+                <div>Personal</div>
+            </div>
+            <div class="step" id="step2Indicator">
+                <div class="step-number">2</div>
+                <div>Financial</div>
+            </div>
+            <div class="step" id="step3Indicator">
+                <div class="step-number">3</div>
+                <div>Loan Details</div>
+            </div>
+            <div class="step" id="step4Indicator">
+                <div class="step-number">4</div>
+                <div>Review</div>
+            </div>
+        </div>
+        
+        <!-- Applying With Banner -->
+        <div id="applyingWithBanner" style="display: none; background: #e3f2fd; padding: 15px; border-radius: 10px; margin-bottom: 25px; border-left: 4px solid var(--primary);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-building" style="color: var(--primary); font-size: 1.2rem;"></i>
+                <div>
+                    <strong>Applying with: <span id="selectedBankName">Not Selected</span></strong>
+                    <div style="font-size: 0.9rem; color: #666;">Loan Type: <span id="selectedLoanType">Not Selected</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 1: Personal Details -->
+        <div class="form-step active" id="step1">
+            <h3 style="color: var(--primary); margin-bottom: 25px;">Personal Details</h3>
+            
+            <div class="form-grid">
+                <div class="form-field">
+                    <label class="field-label required">Full Name</label>
+                    <input type="text" class="field-input" id="applicantName" placeholder="Enter your full name" 
+                           onblur="validateField(this, 'name')">
+                    <div class="validation-message success">✓ Valid name</div>
+                    <div class="validation-message error">✗ Please enter valid name (min 3 characters)</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label required">Mobile Number</label>
+                    <input type="tel" class="field-input" id="applicantMobile" placeholder="Enter 10-digit mobile number"
+                           onblur="validateField(this, 'mobile')">
+                    <div class="validation-message success">✓ Valid mobile number</div>
+                    <div class="validation-message error">✗ Enter valid 10-digit number starting with 6-9</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label required">Email Address</label>
+                    <input type="email" class="field-input" id="applicantEmail" placeholder="Enter your email address"
+                           onblur="validateField(this, 'email')">
+                    <div class="validation-message success">✓ Valid email address</div>
+                    <div class="validation-message error">✗ Please enter valid email address</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label required">Date of Birth</label>
+                    <input type="date" class="field-input" id="applicantDOB" onchange="validateField(this, 'dob')">
+                    <div class="validation-message success">✓ Valid date selected</div>
+                    <div class="validation-message error">✗ You must be at least 21 years old</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label required">PAN Number</label>
+                    <input type="text" class="field-input" id="applicantPAN" placeholder="Enter PAN number (ABCDE1234F)"
+                           onblur="validateField(this, 'pan')">
+                    <div class="validation-message success">✓ Valid PAN number</div>
+                    <div class="validation-message error">✗ Enter valid PAN (format: ABCDE1234F)</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label required">Aadhaar Number</label>
+                    <input type="text" class="field-input" id="applicantAadhaar" placeholder="Enter 12-digit Aadhaar"
+                           onblur="validateField(this, 'aadhaar')">
+                    <div class="validation-message success">✓ Valid Aadhaar number</div>
+                    <div class="validation-message error">✗ Enter valid 12-digit Aadhaar number</div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn btn-primary" onclick="nextFormStep()">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Financial Details -->
+        <div class="form-step" id="step2">
+            <h3 style="color: var(--primary); margin-bottom: 25px;">Financial Details</h3>
+            
+            <div class="form-grid">
+                <div class="form-field">
+                    <label class="field-label required">Employment Type</label>
+                    <select class="field-input" id="employmentType" onchange="validateField(this, 'select')">
+                        <option value="">Select Employment Type</option>
+                        <option value="Salaried">Salaried</option>
+                        <option value="Self Employed">Self Employed</option>
+                        <option value="Business Owner">Business Owner</option>
+                    </select>
+                    <div class="validation-message success">✓ Selected</div>
+                    <div class="validation-message error">✗ Please select employment type</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label">Company/Business Name</label>
+                    <input type="text" class="field-input" id="companyName" placeholder="Enter company name">
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label required">Monthly Income (₹)</label>
+                    <input type="number" class="field-input" id="monthlyIncome" placeholder="Enter monthly income"
+                           onblur="validateField(this, 'income')">
+                    <div class="validation-message success">✓ Valid income</div>
+                    <div class="validation-message error">✗ Minimum income should be ₹15,000</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label">Annual Income (₹)</label>
+                    <input type="number" class="field-input" id="annualIncome" placeholder="Auto-calculated" readonly>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="prevFormStep()">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn btn-primary" onclick="nextFormStep()">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Step 3: Loan Details -->
+        <div class="form-step" id="step3">
+            <h3 style="color: var(--primary); margin-bottom: 25px;">Loan Requirements</h3>
+            
+            <div class="form-grid">
+                <div class="form-field">
+                    <label class="field-label required">Loan Type</label>
+                    <select class="field-input" id="loanType" onchange="validateField(this, 'select')">
+                        <option value="">Select Loan Type</option>
+                        <option value="Home Loan">Home Loan</option>
+                        <option value="Personal Loan">Personal Loan</option>
+                        <option value="Business Loan">Business Loan</option>
+                        <option value="Vehicle Loan">Vehicle Loan</option>
+                    </select>
+                    <div class="validation-message success">✓ Selected</div>
+                    <div class="validation-message error">✗ Please select loan type</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label required">Loan Amount (₹)</label>
+                    <input type="number" class="field-input" id="requiredLoanAmount" 
+                           value="1000000" onblur="validateField(this, 'loanAmount')">
+                    <div class="validation-message success">✓ Valid amount</div>
+                    <div class="validation-message error">✗ Minimum loan amount is ₹50,000</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label required">Purpose of Loan</label>
+                    <select class="field-input" id="loanPurpose" onchange="validateField(this, 'select')">
+                        <option value="">Select Purpose</option>
+                        <option value="Home Purchase">Home Purchase</option>
+                        <option value="Home Renovation">Home Renovation</option>
+                        <option value="Debt Consolidation">Debt Consolidation</option>
+                        <option value="Business Expansion">Business Expansion</option>
+                        <option value="Medical Emergency">Medical Emergency</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Vehicle Purchase">Vehicle Purchase</option>
+                        <option value="Education">Education</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="validation-message success">✓ Selected</div>
+                    <div class="validation-message error">✗ Please select loan purpose</div>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label">Preferred Bank</label>
+                    <input type="text" class="field-input" id="preferredBank" placeholder="Will be auto-filled" readonly>
+                </div>
+                
+                <div class="form-field">
+                    <label class="field-label">Preferred Tenure (Months)</label>
+                    <input type="number" class="field-input" id="preferredTenure" value="120" min="12" max="360">
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="prevFormStep()">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn btn-primary" onclick="nextFormStep()">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Step 4: Review & Submit -->
+        <div class="form-step" id="step4">
+            <h3 style="color: var(--primary); margin-bottom: 25px;">Review & Submit Application</h3>
+            
+            <div style="background: white; padding: 25px; border-radius: 15px; margin-bottom: 30px;">
+                <h4 style="color: var(--primary); margin-bottom: 20px;">Application Summary</h4>
+                
+                <div id="applicationSummary">
+                    <!-- Application summary will be inserted here by JavaScript -->
+                </div>
+                
+                <div style="margin-top: 25px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <input type="checkbox" id="termsCheckbox" style="width: 18px; height: 18px;">
+                        <label for="termsCheckbox">I agree to the <a href="#" style="color: var(--primary);">Terms & Conditions</a> and confirm that all information provided is accurate</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="prevFormStep()">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn btn-primary" onclick="submitApplication()" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="main-footer" id="contact">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>LOAN MITRA</h3>
+            <p style="margin-top: 15px; color: #ddd;">Instant loan approval platform with 100% digital process. Lowest interest rates with maximum transparency.</p>
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <a href="#" style="color: var(--secondary); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                <a href="#" style="color: var(--secondary); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: var(--secondary); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                <a href="#" style="color: var(--secondary); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a onclick="showSection('home')">Home</a>
+                <a onclick="showSection('loans')">Loan Types</a>
+                <a onclick="showSection('govt-banks')">Govt Schemes</a>
+                <a onclick="showSection('nbfc-loans')">NBFC Loans</a>
+                <a onclick="showSection('calculator')">EMI Calculator</a>
+                <a onclick="showSection('apply')">Apply Now</a>
+                <a onclick="openAdminLogin()">Admin Login</a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <div class="footer-links">
+                <a href="tel:+9118001234567"><i class="fas fa-phone"></i> Toll Free: 1800-123-4567</a>
+                <a href="mailto:support@loanmitra.com"><i class="fas fa-envelope"></i> support@loanmitra.com</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> 123 Finance Street, Mumbai, India</a>
+                <a href="https://wa.me/919352665561"><i class="fab fa-whatsapp"></i> WhatsApp: +91 93526 65561</a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Business Hours</h3>
+            <div style="color: #ddd;">
+                <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                <p>Saturday: 10:00 AM - 6:00 PM</p>
+                <p>Sunday: 10:00 AM - 4:00 PM</p>
+                <p style="color: var(--secondary); margin-top: 10px;">24/7 Online Application Available</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="copyright">
+        <p>© 2024 Loan Mitra. All rights reserved. | Digital Loan Platform</p>
+    </div>
+</footer>
+
+</div> <!-- End of main website -->
+
+<script>
+    // =================== CONFIGURATION ===================
+    const ADMIN_PASSWORD = "admin123";
+    let isAdminLoggedIn = false;
+    let leadsDatabase = JSON.parse(localStorage.getItem('loanMitraLeads')) || [];
+    let currentSelectedBank = null;
+    let currentSelectedBankType = null;
+    
+    // =================== INITIALIZATION ===================
+    document.addEventListener('DOMContentLoaded', function() {
+        updateEMICalculator();
+        generateApplicationId();
+        showSection('home');
+        loadLeadsFromStorage();
+        checkAdminSession();
+        loadGovernmentBanks();
+        loadNBFCs();
+        console.log('Loan Mitra loaded successfully!');
+    });
+    
+    // =================== DATA MODELS ===================
+    
+    const governmentBanks = [
+        {
+            id: "sbi",
+            name: "State Bank of India (SBI)",
+            type: "government",
+            logo: "🏦",
+            interestRate: "8.4% - 9.5%",
+            processingTime: "7-10 days",
+            maxAmount: "₹5 Crores",
+            minAmount: "₹5 Lakhs",
+            features: ["Lowest Interest", "Govt Schemes", "Wide Network", "Online Process"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan", "Vehicle Loan"],
+            description: "India's largest public sector bank with extensive network and government-backed schemes."
+        },
+        {
+            id: "pnb",
+            name: "Punjab National Bank (PNB)",
+            type: "government",
+            logo: "🏛️",
+            interestRate: "8.5% - 9.6%",
+            processingTime: "5-8 days",
+            maxAmount: "₹3 Crores",
+            minAmount: "₹3 Lakhs",
+            features: ["PM Awas Yojana", "MUDRA Loan", "Quick Processing", "Flexible EMI"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan"],
+            description: "Second largest public sector bank with strong presence in North India."
+        },
+        {
+            id: "bob",
+            name: "Bank of Baroda (BOB)",
+            type: "government",
+            logo: "🏢",
+            interestRate: "8.6% - 9.7%",
+            processingTime: "6-9 days",
+            maxAmount: "₹4 Crores",
+            minAmount: "₹4 Lakhs",
+            features: ["International Presence", "NRI Loans", "Digital Banking", "Low Processing"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan", "Vehicle Loan"],
+            description: "International Indian bank with strong global presence."
+        },
+        {
+            id: "canara",
+            name: "Canara Bank",
+            type: "government",
+            logo: "🇮🇳",
+            interestRate: "8.7% - 9.8%",
+            processingTime: "7-10 days",
+            maxAmount: "₹2.5 Crores",
+            minAmount: "₹2 Lakhs",
+            features: ["MSME Focus", "Education Loan", "Agriculture Loan", "Women Entrepreneurs"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan", "Education Loan"],
+            description: "Major public sector bank with focus on MSME and education loans."
+        },
+        {
+            id: "union",
+            name: "Union Bank of India",
+            type: "government",
+            logo: "🤝",
+            interestRate: "8.8% - 9.9%",
+            processingTime: "5-7 days",
+            maxAmount: "₹2 Crores",
+            minAmount: "₹2 Lakhs",
+            features: ["Digital First", "Quick Approval", "Low Charges", "Wide Reach"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan"],
+            description: "Progressive public sector bank with strong digital initiatives."
+        },
+        {
+            id: "boi",
+            name: "Bank of India",
+            type: "government",
+            logo: "🏦",
+            interestRate: "8.9% - 10%",
+            processingTime: "6-8 days",
+            maxAmount: "₹3 Crores",
+            minAmount: "₹3 Lakhs",
+            features: ["Global Network", "NRI Services", "Trade Finance", "Corporate Banking"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan", "Vehicle Loan"],
+            description: "International commercial bank with presence in 22 countries."
+        },
+        {
+            id: "indian",
+            name: "Indian Bank",
+            type: "government",
+            logo: "🇮🇳",
+            interestRate: "8.6% - 9.7%",
+            processingTime: "5-7 days",
+            maxAmount: "₹2 Crores",
+            minAmount: "₹2 Lakhs",
+            features: ["Southern Focus", "Retail Banking", "Agriculture Loans", "Digital Services"],
+            loanTypes: ["Home Loan", "Personal Loan", "Agriculture Loan"],
+            description: "Public sector bank with strong presence in Southern India."
+        },
+        {
+            id: "cbi",
+            name: "Central Bank of India",
+            type: "government",
+            logo: "🏛️",
+            interestRate: "9% - 10.1%",
+            processingTime: "7-10 days",
+            maxAmount: "₹1.5 Crores",
+            minAmount: "₹1.5 Lakhs",
+            features: ["Oldest Bank", "Government Focus", "Rural Banking", "Social Schemes"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan"],
+            description: "India's oldest and first commercial bank owned by Indians."
+        },
+        {
+            id: "iob",
+            name: "Indian Overseas Bank",
+            type: "government",
+            logo: "🌏",
+            interestRate: "9.1% - 10.2%",
+            processingTime: "6-9 days",
+            maxAmount: "₹2 Crores",
+            minAmount: "₹2 Lakhs",
+            features: ["NRI Focus", "Foreign Exchange", "International Banking", "Quick Processing"],
+            loanTypes: ["Home Loan", "Personal Loan", "NRI Loan"],
+            description: "Public sector bank with strong NRI and international focus."
+        },
+        {
+            id: "uco",
+            name: "UCO Bank",
+            type: "government",
+            logo: "🏦",
+            interestRate: "9.2% - 10.3%",
+            processingTime: "5-8 days",
+            maxAmount: "₹1.5 Crores",
+            minAmount: "₹1.5 Lakhs",
+            features: ["Eastern Focus", "MSME Loans", "Retail Banking", "Digital Initiatives"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan"],
+            description: "Public sector bank with strong presence in Eastern India."
+        },
+        {
+            id: "maharashtra",
+            name: "Bank of Maharashtra",
+            type: "government",
+            logo: "🏔️",
+            interestRate: "8.8% - 9.9%",
+            processingTime: "4-7 days",
+            maxAmount: "₹2 Crores",
+            minAmount: "₹2 Lakhs",
+            features: ["Western Focus", "Quick Processing", "Low Charges", "Customer Service"],
+            loanTypes: ["Home Loan", "Personal Loan", "Business Loan", "Vehicle Loan"],
+            description: "Public sector bank with strong presence in Maharashtra."
+        },
+        {
+            id: "punjabsind",
+            name: "Punjab & Sind Bank",
+            type: "government",
+            logo: "🎯",
+            interestRate: "9% - 10.1%",
+            processingTime: "6-9 days",
+            maxAmount: "₹1.5 Crores",
+            minAmount: "₹1.5 Lakhs",
+            features: ["Punjab Focus", "Agriculture Loans", "MSME Focus", "Personalized Service"],
+            loanTypes: ["Home Loan", "Personal Loan", "Agriculture Loan"],
+            description: "Public sector bank with strong presence in Punjab region."
+        }
+    ];
+    
+    const nbfcBanks = [
+        {
+            id: "bajaj",
+            name: "Bajaj Finance Limited",
+            type: "nbfc",
+            logo: "⚡",
+            interestRate: "10.5% - 12.5%",
+            processingTime: "24-48 hours",
+            maxAmount: "₹25 Lakhs",
+            minAmount: "₹50,000",
+            features: ["Instant Approval", "Minimal Documents", "100% Online", "Flexible Tenure"],
+            loanTypes: ["Personal Loan", "Business Loan", "Consumer Durable"],
+            description: "India's largest NBFC with fastest loan processing and instant approvals."
+        },
+        {
+            id: "hdfc",
+            name: "HDFC Limited",
+            type: "nbfc",
+            logo: "🏠",
+            interestRate: "9.5% - 11%",
+            processingTime: "3-5 days",
+            maxAmount: "₹5 Crores",
+            minAmount: "₹5 Lakhs",
+            features: ["Home Loan Specialist", "Low Interest", "Long Tenure", "Balance Transfer"],
+            loanTypes: ["Home Loan", "Plot Loan", "Home Improvement"],
+            description: "India's leading housing finance company with lowest interest rates."
+        },
+        {
+            id: "icici",
+            name: "ICICI Home Finance",
+            type: "nbfc",
+            logo: "🏡",
+            interestRate: "9.8% - 11.5%",
+            processingTime: "2-4 days",
+            maxAmount: "₹3 Crores",
+            minAmount: "₹5 Lakhs",
+            features: ["Quick Processing", "Digital Process", "Top-up Loans", "Pre-approved Offers"],
+            loanTypes: ["Home Loan", "Loan Against Property"],
+            description: "Leading housing finance company with quick digital processing."
+        },
+        {
+            id: "lt",
+            name: "L&T Finance",
+            type: "nbfc",
+            logo: "💼",
+            interestRate: "11% - 13%",
+            processingTime: "3-6 days",
+            maxAmount: "₹50 Lakhs",
+            minAmount: "₹1 Lakh",
+            features: ["Infrastructure Focus", "Corporate Loans", "Structured Finance", "Project Loans"],
+            loanTypes: ["Business Loan", "Personal Loan", "Vehicle Loan"],
+            description: "Leading infrastructure and corporate finance NBFC."
+        },
+        {
+            id: "mahindra",
+            name: "Mahindra Finance",
+            type: "nbfc",
+            logo: "🚗",
+            interestRate: "10% - 12%",
+            processingTime: "2-4 days",
+            maxAmount: "₹30 Lakhs",
+            minAmount: "₹50,000",
+            features: ["Vehicle Focus", "Rural Reach", "Tractor Loans", "Used Vehicle Finance"],
+            loanTypes: ["Vehicle Loan", "Tractor Loan", "Commercial Vehicle"],
+            description: "Leading vehicle and tractor finance company with strong rural presence."
+        },
+        {
+            id: "chola",
+            name: "Cholamandalam Finance",
+            type: "nbfc",
+            logo: "🚙",
+            interestRate: "10.5% - 12.5%",
+            processingTime: "3-5 days",
+            maxAmount: "₹1 Crore",
+            minAmount: "₹1 Lakh",
+            features: ["Vehicle Loans", "Used Car Finance", "Home Loans", "Business Loans"],
+            loanTypes: ["Vehicle Loan", "Home Loan", "Business Loan"],
+            description: "Diversified NBFC with focus on vehicle and home loans."
+        },
+        {
+            id: "shriram",
+            name: "Shriram Transport",
+            type: "nbfc",
+            logo: "🚛",
+            interestRate: "11% - 13%",
+            processingTime: "3-6 days",
+            maxAmount: "₹2 Crores",
+            minAmount: "₹5 Lakhs",
+            features: ["Commercial Vehicles", "Used Truck Finance", "Fleet Finance", "SME Focus"],
+            loanTypes: ["Commercial Vehicle", "Construction Equipment"],
+            description: "India's largest commercial vehicle finance company."
+        },
+        {
+            id: "muthoot",
+            name: "Muthoot Finance",
+            type: "nbfc",
+            logo: "💰",
+            interestRate: "12% - 14%",
+            processingTime: "2 hours",
+            maxAmount: "₹1 Crore",
+            minAmount: "₹1,500",
+            features: ["Same Day Disbursal", "High LTV", "Online Gold Loan", "Doorstep Service"],
+            loanTypes: ["Gold Loan"],
+            description: "India's largest gold loan company with same day disbursal."
+        },
+        {
+            id: "manappuram",
+            name: "Manappuram Finance",
+            type: "nbfc",
+            logo: "💎",
+            interestRate: "12.5% - 14.5%",
+            processingTime: "1 hour",
+            maxAmount: "₹50 Lakhs",
+            minAmount: "₹1,000",
+            features: ["Instant Gold Loan", "Online Process", "High LTV Ratio", "Flexible Repayment"],
+            loanTypes: ["Gold Loan"],
+            description: "Leading gold loan company with instant processing."
+        },
+        {
+            id: "adityabirla",
+            name: "Aditya Birla Finance",
+            type: "nbfc",
+            logo: "🏢",
+            interestRate: "11.5% - 13.5%",
+            processingTime: "4-7 days",
+            maxAmount: "₹2 Crores",
+            minAmount: "₹1 Lakh",
+            features: ["Corporate Loans", "SME Focus", "Structured Finance", "Working Capital"],
+            loanTypes: ["Business Loan", "Personal Loan", "Working Capital"],
+            description: "Diversified NBFC with focus on corporate and SME financing."
+        },
+        {
+            id: "piramal",
+            name: "Piramal Capital",
+            type: "nbfc",
+            logo: "🏘️",
+            interestRate: "10% - 12%",
+            processingTime: "5-8 days",
+            maxAmount: "₹75 Lakhs",
+            minAmount: "₹5 Lakhs",
+            features: ["Affordable Housing", "PMAY Linked", "Home Loans", "Construction Finance"],
+            loanTypes: ["Home Loan", "Loan Against Property"],
+            description: "Leading housing finance company focusing on affordable housing."
+        },
+        {
+            id: "iifl",
+            name: "IIFL Finance",
+            type: "nbfc",
+            logo: "📊",
+            interestRate: "11% - 13.5%",
+            processingTime: "3-6 days",
+            maxAmount: "₹2 Crores",
+            minAmount: "₹50,000",
+            features: ["Gold Loans", "Home Loans", "Business Loans", "Digital Platform"],
+            loanTypes: ["Gold Loan", "Home Loan", "Business Loan"],
+            description: "Diversified NBFC offering multiple loan products."
+        },
+        {
+            id: "aadhar",
+            name: "Aadhar Housing Finance",
+            type: "nbfc",
+            logo: "🏠",
+            interestRate: "9.5% - 11.5%",
+            processingTime: "5-9 days",
+            maxAmount: "₹30 Lakhs",
+            minAmount: "₹1 Lakh",
+            features: ["Affordable Housing", "EWS/LIG Focus", "PMAY Partner", "Low Income Housing"],
+            loanTypes: ["Home Loan"],
+            description: "Affordable housing finance company focusing on low-income groups."
+        }
+    ];
+    
+    // =================== BANK/NBFC FUNCTIONS ===================
+    
+    function loadGovernmentBanks() {
+        const container = document.getElementById('govtBanksContainer');
+        container.innerHTML = '';
+        
+        governmentBanks.forEach(bank => {
+            const card = createBankCard(bank);
+            container.appendChild(card);
+        });
+    }
+    
+    function loadNBFCs() {
+        const container = document.getElementById('nbfcBanksContainer');
+        container.innerHTML = '';
+        
+        nbfcBanks.forEach(bank => {
+            const card = createBankCard(bank);
+            container.appendChild(card);
+        });
+    }
+    
+    function createBankCard(bank) {
+        const div = document.createElement('div');
+        div.className = `bank-card ${bank.type}`;
+        div.setAttribute('data-id', bank.id);
+        div.setAttribute('data-type', bank.type);
+        div.setAttribute('data-loan-types', bank.loanTypes.join(','));
+        
+        const badge = bank.type === 'government' ? '🏛️ Govt Bank' : '⚡ NBFC';
+        const badgeClass = bank.type === 'government' ? 'govt-badge' : 'nbfc-badge';
+        
+        div.innerHTML = `
+            <div class="logo-container">
+                <div class="bank-logo ${bank.type}-logo">
+                    ${bank.logo}
+                </div>
+                <span class="bank-badge ${badgeClass}">${badge}</span>
+            </div>
+            
+            <h3 class="bank-name">${bank.name}</h3>
+            <div class="bank-type">${bank.loanTypes.join(' • ')}</div>
+            
+            <div style="margin: 15px 0; padding: 15px; background: white; border-radius: 8px;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: ${bank.type === 'government' ? '#1a237e' : '#ff6f00'}">
+                    ${bank.interestRate}
+                </div>
+                <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">
+                    Processing: ${bank.processingTime}
+                </div>
+            </div>
+            
+            <ul class="bank-features">
+                ${bank.features.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+            
+            <div class="bank-actions">
+                <button class="btn ${bank.type === 'government' ? 'btn-primary' : 'btn-warning'}" 
+                        onclick="applyWithBank('${bank.id}', '${bank.type}')" 
+                        style="flex: 1;">
+                    <i class="fas fa-paper-plane"></i> Apply Now
+                </button>
+                <button class="btn btn-secondary" onclick="viewBankDetails('${bank.id}')">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+            </div>
+        `;
+        
+        return div;
+    }
+    
+    function filterBanks(type) {
+        const buttons = document.querySelectorAll('#govt-banks .filter-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        const cards = document.querySelectorAll('#govtBanksContainer .bank-card');
+        cards.forEach(card => {
+            if (type === 'all') {
+                card.style.display = 'block';
+            } else {
+                const loanTypes = card.getAttribute('data-loan-types').toLowerCase();
+                if (loanTypes.includes(type.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    }
+    
+    function filterNBFCs(type) {
+        const buttons = document.querySelectorAll('#nbfc-loans .filter-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        const cards = document.querySelectorAll('#nbfcBanksContainer .bank-card');
+        cards.forEach(card => {
+            if (type === 'all') {
+                card.style.display = 'block';
+            } else if (type === 'fast') {
+                const processing = card.querySelector('.bank-type').textContent;
+                if (processing.toLowerCase().includes('hour') || processing.includes('24')) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            } else {
+                const loanTypes = card.getAttribute('data-loan-types').toLowerCase();
+                if (loanTypes.includes(type.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    }
+    
+    function applyWithBank(bankId, bankType) {
+        const bank = bankType === 'government' 
+            ? governmentBanks.find(b => b.id === bankId)
+            : nbfcBanks.find(b => b.id === bankId);
+        
+        if (!bank) return;
+        
+        currentSelectedBank = bank;
+        currentSelectedBankType = bankType;
+        
+        // Update the applying banner
+        document.getElementById('applyingWithBanner').style.display = 'block';
+        document.getElementById('selectedBankName').textContent = bank.name;
+        document.getElementById('selectedLoanType').textContent = bank.loanTypes[0] || 'Personal Loan';
+        
+        // Auto-fill preferred bank field
+        document.getElementById('preferredBank').value = bank.name;
+        
+        // Auto-select loan type based on bank's first loan type
+        const loanTypeSelect = document.getElementById('loanType');
+        const bankLoanType = bank.loanTypes[0];
+        if (bankLoanType) {
+            for (let option of loanTypeSelect.options) {
+                if (option.text === bankLoanType) {
+                    loanTypeSelect.value = option.value;
+                    break;
+                }
+            }
+        }
+        
+        // Show application form
+        showSection('apply');
+        
+        // Scroll to form
+        window.scrollTo({
+            top: document.getElementById('apply').offsetTop - 80,
+            behavior: 'smooth'
+        });
+    }
+    
+    function viewBankDetails(bankId) {
+        // Find bank in either array
+        let bank = governmentBanks.find(b => b.id === bankId);
+        if (!bank) {
+            bank = nbfcBanks.find(b => b.id === bankId);
+        }
+        
+        if (!bank) return;
+        
+        const details = `
+            <strong>${bank.name}</strong><br><br>
+            <strong>Interest Rate:</strong> ${bank.interestRate}<br>
+            <strong>Processing Time:</strong> ${bank.processingTime}<br>
+            <strong>Maximum Amount:</strong> ${bank.maxAmount}<br>
+            <strong>Minimum Amount:</strong> ${bank.minAmount}<br><br>
+            <strong>Loan Types:</strong> ${bank.loanTypes.join(', ')}<br><br>
+            <strong>Features:</strong><br>
+            ${bank.features.map(f => `• ${f}`).join('<br>')}<br><br>
+            <strong>Description:</strong><br>
+            ${bank.description}
+        `;
+        
+        alert(details);
+    }
+    
+    // =================== LOAN MODAL FUNCTIONS ===================
+    
+    function showLoanDetails(loanType) {
+        const modalId = loanType + 'LoanModal';
+        const modal = document.getElementById(modalId);
+        if(modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    function closeLoanModal() {
+        document.querySelectorAll('.loan-modal').forEach(modal => {
+            modal.style.display = 'none';
+        });
+        document.body.style.overflow = 'auto';
+    }
+    
+    function startHomeLoanApplication() {
+        closeLoanModal();
+        applyWithBank('sbi', 'government');
+        document.getElementById('loanType').value = 'Home Loan';
+    }
+    
+    function startPersonalLoanApplication() {
+        closeLoanModal();
+        applyWithBank('bajaj', 'nbfc');
+        document.getElementById('loanType').value = 'Personal Loan';
+    }
+    
+    function startBusinessLoanApplication() {
+        closeLoanModal();
+        applyWithBank('lt', 'nbfc');
+        document.getElementById('loanType').value = 'Business Loan';
+    }
+    
+    function startVehicleLoanApplication() {
+        closeLoanModal();
+        applyWithBank('mahindra', 'nbfc');
+        document.getElementById('loanType').value = 'Vehicle Loan';
+    }
+    
+    // =================== SECTION NAVIGATION ===================
+    
+    function showSection(sectionId) {
+        // Hide all sections
+        const sections = ['home', 'loans', 'govt-banks', 'nbfc-loans', 'calculator', 'apply'];
+        sections.forEach(id => {
+            const element = document.getElementById(id);
+            if(element) {
+                element.style.display = 'none';
+            }
+        });
+        
+        // Show selected section
+        const targetSection = document.getElementById(sectionId);
+        if(targetSection) {
+            targetSection.style.display = 'block';
+            
+            window.scrollTo({
+                top: targetSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Update active nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        document.querySelectorAll(`[onclick*="showSection('${sectionId}')"]`).forEach(link => {
+            if(link.classList.contains('nav-link')) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Special handling for form
+        if (sectionId === 'apply') {
+            resetFormSteps();
+        }
+    }
+    
+    // =================== LEADS DATABASE FUNCTIONS ===================
+    
+    function saveLeadToDatabase(leadData) {
+        const leadId = 'LEAD-' + Date.now().toString().slice(-8) + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
+        
+        const newLead = {
+            id: leadId,
+            ...leadData,
+            selectedBank: currentSelectedBank ? currentSelectedBank.name : 'Not Selected',
+            bankType: currentSelectedBankType || 'Not Selected',
+            status: 'New',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+        
+        leadsDatabase.unshift(newLead);
+        localStorage.setItem('loanMitraLeads', JSON.stringify(leadsDatabase));
+        
+        console.log('Lead saved:', newLead);
+        
+        if (isAdminLoggedIn) {
+            updateAdminStats();
+            refreshLeadsTable();
+        }
+        
+        return leadId;
+    }
+    
+    function loadLeadsFromStorage() {
+        const storedLeads = localStorage.getItem('loanMitraLeads');
+        if (storedLeads) {
+            leadsDatabase = JSON.parse(storedLeads);
+        }
+    }
+    
+    function updateLeadStatus(leadId, newStatus) {
+        const leadIndex = leadsDatabase.findIndex(lead => lead.id === leadId);
+        if (leadIndex !== -1) {
+            leadsDatabase[leadIndex].status = newStatus;
+            leadsDatabase[leadIndex].updatedAt = new Date().toISOString();
+            
+            localStorage.setItem('loanMitraLeads', JSON.stringify(leadsDatabase));
+            
+            if (isAdminLoggedIn) {
+                refreshLeadsTable();
+                updateAdminStats();
+            }
+            
+            return true;
+        }
+        return false;
+    }
+    
+    function deleteLead(leadId) {
+        if (confirm('Are you sure you want to delete this lead?')) {
+            leadsDatabase = leadsDatabase.filter(lead => lead.id !== leadId);
+            localStorage.setItem('loanMitraLeads', JSON.stringify(leadsDatabase));
+            
+            if (isAdminLoggedIn) {
+                refreshLeadsTable();
+                updateAdminStats();
+            }
+            
+            alert('Lead deleted successfully!');
+        }
+    }
+    
+    function clearAllLeads() {
+        if (confirm('⚠️ WARNING: This will delete ALL leads permanently. Are you sure?')) {
+            leadsDatabase = [];
+            localStorage.removeItem('loanMitraLeads');
+            
+            if (isAdminLoggedIn) {
+                refreshLeadsTable();
+                updateAdminStats();
+            }
+            
+            alert('All leads have been cleared!');
+        }
+    }
+    
+    // =================== ADMIN PANEL FUNCTIONS ===================
+    
+    function openAdminLogin() {
+        document.getElementById('adminLoginSection').style.display = 'flex';
+    }
+    
+    function closeAdminLogin() {
+        document.getElementById('adminLoginSection').style.display = 'none';
+        document.getElementById('adminPassword').value = '';
+    }
+    
+    function adminLogin() {
+        const password = document.getElementById('adminPassword').value;
+        
+        if (password === ADMIN_PASSWORD) {
+            isAdminLoggedIn = true;
+            document.getElementById('mainWebsite').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            closeAdminLogin();
+            updateAdminStats();
+            showAdminDashboard();
+            sessionStorage.setItem('loanMitraAdminLoggedIn', 'true');
+            console.log('Admin logged in');
+        } else {
+            alert('❌ Incorrect password! Please try again.');
+        }
+    }
+    
+    function checkAdminSession() {
+        const isLoggedIn = sessionStorage.getItem('loanMitraAdminLoggedIn');
+        if (isLoggedIn === 'true') {
+            document.getElementById('mainWebsite').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            isAdminLoggedIn = true;
+            updateAdminStats();
+            showAdminDashboard();
+        }
+    }
+    
+    function backToWebsite() {
+        if (confirm('Go back to Loan Mitra Website?')) {
+            isAdminLoggedIn = false;
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('mainWebsite').style.display = 'block';
+            sessionStorage.removeItem('loanMitraAdminLoggedIn');
+            showSection('home');
+            console.log('Switched back to website');
+        }
+    }
+    
+    function showAdminDashboard() {
+        document.getElementById('adminDashboard').style.display = 'block';
+        document.getElementById('adminLeads').style.display = 'none';
+        updateAdminStats();
+    }
+    
+    function showAdminLeads() {
+        document.getElementById('adminDashboard').style.display = 'none';
+        document.getElementById('adminLeads').style.display = 'block';
+        refreshLeadsTable();
+    }
+    
+    function showRecentLeads() {
+        showAdminLeads();
+    }
+    
+    function updateAdminStats() {
+        const totalLeads = leadsDatabase.length;
+        const pendingLeads = leadsDatabase.filter(lead => lead.status === 'New' || lead.status === 'Pending').length;
+        const approvedLeads = leadsDatabase.filter(lead => lead.status === 'Approved').length;
+        const govtLeads = leadsDatabase.filter(lead => lead.bankType === 'government').length;
+        const nbfcLeads = leadsDatabase.filter(lead => lead.bankType === 'nbfc').length;
+        const businessLeads = leadsDatabase.filter(lead => lead.loanType === 'Business Loan').length;
+        
+        document.getElementById('totalLeadsCount').textContent = totalLeads;
+        document.getElementById('pendingLeadsCount').textContent = pendingLeads;
+        document.getElementById('approvedLeadsCount').textContent = approvedLeads;
+        document.getElementById('govtLeadsCount').textContent = govtLeads;
+        document.getElementById('nbfcLeadsCount').textContent = nbfcLeads;
+        document.getElementById('businessLeadsCount').textContent = businessLeads;
+    }
+    
+    function refreshLeads() {
+        refreshLeadsTable();
+    }
+    
+    function refreshLeadsTable() {
+        const tableContainer = document.getElementById('leadsTableContainer');
+        
+        if (leadsDatabase.length === 0) {
+            tableContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;">📭</div>
+                    <h3>No Leads Yet</h3>
+                    <p>No loan applications have been submitted yet.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        let tableHTML = `
+            <table class="leads-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Bank</th>
+                        <th>Loan Type</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+        
+        leadsDatabase.forEach(lead => {
+            const date = new Date(lead.createdAt).toLocaleDateString('en-IN');
+            const time = new Date(lead.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+            const statusClass = `status-${lead.status.toLowerCase()}`;
+            
+            tableHTML += `
+                <tr>
+                    <td><strong>${lead.id}</strong></td>
+                    <td>${lead.name || 'N/A'}</td>
+                    <td>${lead.mobile || 'N/A'}</td>
+                    <td>${lead.selectedBank || 'Not Selected'}</td>
+                    <td>${lead.loanType || 'N/A'}</td>
+                    <td>₹${parseInt(lead.loanAmount || 0).toLocaleString('en-IN')}</td>
+                    <td>${date}<br><small>${time}</small></td>
+                    <td><span class="status-badge ${statusClass}">${lead.status}</span></td>
+                    <td>
+                        <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;" onclick="viewLeadDetails('${lead.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-success" style="padding: 5px 10px; font-size: 0.8rem;" onclick="updateLeadStatus('${lead.id}', 'Approved')">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.8rem;" onclick="deleteLead('${lead.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        tableHTML += `
+                </tbody>
+            </table>
+        `;
+        
+        tableContainer.innerHTML = tableHTML;
+    }
+    
+    function viewLeadDetails(leadId) {
+        const lead = leadsDatabase.find(l => l.id === leadId);
+        if (!lead) {
+            alert('Lead not found!');
+            return;
+        }
+        
+        const details = `
+            <strong>Lead ID:</strong> ${lead.id}<br>
+            <strong>Name:</strong> ${lead.name}<br>
+            <strong>Mobile:</strong> ${lead.mobile}<br>
+            <strong>Email:</strong> ${lead.email}<br>
+            <strong>Selected Bank:</strong> ${lead.selectedBank}<br>
+            <strong>Bank Type:</strong> ${lead.bankType}<br>
+            <strong>Loan Type:</strong> ${lead.loanType}<br>
+            <strong>Loan Amount:</strong> ₹${parseInt(lead.loanAmount).toLocaleString('en-IN')}<br>
+            <strong>Monthly Income:</strong> ₹${parseInt(lead.income).toLocaleString('en-IN')}<br>
+            <strong>Employment:</strong> ${lead.employment}<br>
+            <strong>Purpose:</strong> ${lead.purpose}<br>
+            <strong>Status:</strong> ${lead.status}<br>
+            <strong>Applied On:</strong> ${new Date(lead.createdAt).toLocaleString('en-IN')}<br>
+        `;
+        
+        alert(`LEAD DETAILS:\n\n${details}`);
+    }
+    
+    function filterLeads() {
+        const searchTerm = document.getElementById('searchLeads').value.toLowerCase();
+        const statusFilter = document.getElementById('filterStatus').value;
+        const loanTypeFilter = document.getElementById('filterLoanType').value;
+        const bankTypeFilter = document.getElementById('filterBankType').value;
+        
+        // Simple filtering - can be enhanced
+        refreshLeadsTable();
+    }
+    
+    function exportAllLeads() {
+        if (leadsDatabase.length === 0) {
+            alert('No leads to export!');
+            return;
+        }
+        
+        let csvContent = "ID,Name,Mobile,Email,Selected Bank,Bank Type,Loan Type,Loan Amount,Monthly Income,Employment,Purpose,Status,Applied Date\n";
+        
+        leadsDatabase.forEach(lead => {
+            const row = [
+                lead.id,
+                `"${lead.name}"`,
+                lead.mobile,
+                lead.email,
+                lead.selectedBank,
+                lead.bankType,
+                lead.loanType,
+                lead.loanAmount,
+                lead.income,
+                lead.employment,
+                lead.purpose,
+                lead.status,
+                new Date(lead.createdAt).toLocaleDateString('en-IN')
+            ];
+            csvContent += row.join(',') + '\n';
+        });
+        
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `loan_mitra_leads_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        
+        alert(`Exported ${leadsDatabase.length} leads to CSV file!`);
+    }
+    
+    // =================== EMI CALCULATOR ===================
+    
+    function updateEMICalculator() {
+        const loanAmount = parseFloat(document.getElementById('loanAmountSlider').value);
+        const interestRate = parseFloat(document.getElementById('interestRateSlider').value);
+        const tenureYears = parseFloat(document.getElementById('tenureSlider').value);
+        
+        document.getElementById('loanAmountValue').textContent = formatCurrency(loanAmount);
+        document.getElementById('interestRateValue').textContent = interestRate.toFixed(1) + '%';
+        document.getElementById('tenureValue').textContent = tenureYears + ' Years';
+        document.getElementById('displayLoanAmount').textContent = formatCurrency(loanAmount);
+        
+        const monthlyRate = interestRate / 12 / 100;
+        const tenureMonths = tenureYears * 12;
+        
+        if(loanAmount && monthlyRate && tenureMonths) {
+            const emi = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, tenureMonths)) / 
+                        (Math.pow(1 + monthlyRate, tenureMonths) - 1);
+            const totalPayment = emi * tenureMonths;
+            const totalInterest = totalPayment - loanAmount;
+            
+            document.getElementById('emiAmount').textContent = formatCurrency(Math.round(emi));
+            document.getElementById('totalInterest').textContent = formatCurrency(Math.round(totalInterest));
+            document.getElementById('totalPayment').textContent = formatCurrency(Math.round(totalPayment));
+            
+            document.getElementById('requiredLoanAmount').value = loanAmount;
+        }
+    }
+    
+    function formatCurrency(amount) {
+        return '₹' + amount.toLocaleString('en-IN');
+    }
+    
+    // =================== APPLICATION FORM FUNCTIONS ===================
+    
+    let currentStep = 1;
+    const totalSteps = 4;
+    
+    function nextFormStep() {
+        if(currentStep < totalSteps) {
+            if(validateCurrentStep()) {
+                document.getElementById('step' + currentStep).classList.remove('active');
+                document.getElementById('step' + currentStep + 'Indicator').classList.remove('active');
+                
+                currentStep++;
+                
+                document.getElementById('step' + currentStep).classList.add('active');
+                document.getElementById('step' + currentStep + 'Indicator').classList.add('active');
+                
+                if(currentStep === 4) {
+                    generateApplicationSummary();
+                }
+            }
+        }
+    }
+    
+    function prevFormStep() {
+        if(currentStep > 1) {
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + currentStep + 'Indicator').classList.remove('active');
+            
+            currentStep--;
+            
+            document.getElementById('step' + currentStep).classList.add('active');
+            document.getElementById('step' + currentStep + 'Indicator').classList.add('active');
+        }
+    }
+    
+    function resetFormSteps() {
+        document.getElementById('step' + currentStep).classList.remove('active');
+        document.getElementById('step' + currentStep + 'Indicator').classList.remove('active');
+        
+        currentStep = 1;
+        
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step1Indicator').classList.add('active');
+    }
+    
+    function validateCurrentStep() {
+        let isValid = true;
+        
+        if(currentStep === 1) {
+            const fields = ['applicantName', 'applicantMobile', 'applicantEmail', 'applicantPAN', 'applicantAadhaar'];
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if(field) {
+                    validateField(field, getValidationType(fieldId));
+                    if(field.parentElement.classList.contains('invalid')) {
+                        isValid = false;
+                    }
+                }
+            });
+        }
+        else if(currentStep === 2) {
+            const fields = ['employmentType', 'monthlyIncome'];
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if(field) {
+                    validateField(field, getValidationType(fieldId));
+                    if(field.parentElement.classList.contains('invalid')) {
+                        isValid = false;
+                    }
+                }
+            });
+            
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value);
+            if(monthlyIncome && !isNaN(monthlyIncome)) {
+                document.getElementById('annualIncome').value = monthlyIncome * 12;
+            }
+        }
+        else if(currentStep === 3) {
+            const fields = ['loanType', 'requiredLoanAmount', 'loanPurpose'];
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if(field) {
+                    validateField(field, getValidationType(fieldId));
+                    if(field.parentElement.classList.contains('invalid')) {
+                        isValid = false;
+                    }
+                }
+            });
+        }
+        
+        return isValid;
+    }
+    
+    function validateField(field, type) {
+        const value = field.value.trim();
+        const parent = field.parentElement;
+        
+        parent.classList.remove('valid', 'invalid');
+        
+        let isValid = false;
+        
+        switch(type) {
+            case 'name':
+                isValid = value.length >= 3;
+                break;
+            case 'mobile':
+                isValid = /^[6-9]\d{9}$/.test(value);
+                break;
+            case 'email':
+                isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                break;
+            case 'pan':
+                isValid = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value.toUpperCase());
+                break;
+            case 'aadhaar':
+                isValid = /^\d{12}$/.test(value);
+                break;
+            case 'dob':
+                const dob = new Date(value);
+                const age = new Date().getFullYear() - dob.getFullYear();
+                isValid = age >= 21;
+                break;
+            case 'select':
+                isValid = value !== '';
+                break;
+            case 'income':
+                isValid = parseFloat(value) >= 15000;
+                break;
+            case 'loanAmount':
+                isValid = parseFloat(value) >= 50000;
+                break;
+        }
+        
+        if(isValid) {
+            parent.classList.add('valid');
+        } else if(value !== '') {
+            parent.classList.add('invalid');
+        }
+        
+        return isValid;
+    }
+    
+    function getValidationType(fieldId) {
+        const validationMap = {
+            'applicantName': 'name',
+            'applicantMobile': 'mobile',
+            'applicantEmail': 'email',
+            'applicantPAN': 'pan',
+            'applicantAadhaar': 'aadhaar',
+            'applicantDOB': 'dob',
+            'employmentType': 'select',
+            'monthlyIncome': 'income',
+            'loanType': 'select',
+            'requiredLoanAmount': 'loanAmount',
+            'loanPurpose': 'select'
+        };
+        
+        return validationMap[fieldId] || 'text';
+    }
+    
+    function generateApplicationSummary() {
+        const summaryDiv = document.getElementById('applicationSummary');
+        const formData = {
+            name: document.getElementById('applicantName').value,
+            mobile: document.getElementById('applicantMobile').value,
+            email: document.getElementById('applicantEmail').value,
+            pan: document.getElementById('applicantPAN').value,
+            aadhaar: document.getElementById('applicantAadhaar').value,
+            dob: document.getElementById('applicantDOB').value,
+            employment: document.getElementById('employmentType').value,
+            income: document.getElementById('monthlyIncome').value,
+            loanType: document.getElementById('loanType').value,
+            loanAmount: document.getElementById('requiredLoanAmount').value,
+            purpose: document.getElementById('loanPurpose').value,
+            preferredBank: document.getElementById('preferredBank').value,
+            tenure: document.getElementById('preferredTenure').value
+        };
+        
+        summaryDiv.innerHTML = `
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-bottom: 15px;">
+                <div style="font-weight: 600; color: #555;">Full Name:</div>
+                <div>${formData.name}</div>
+                
+                <div style="font-weight: 600; color: #555;">Mobile:</div>
+                <div>${formData.mobile}</div>
+                
+                <div style="font-weight: 600; color: #555;">Email:</div>
+                <div>${formData.email}</div>
+                
+                <div style="font-weight: 600; color: #555;">PAN Number:</div>
+                <div>${formData.pan}</div>
+                
+                <div style="font-weight: 600; color: #555;">Aadhaar Number:</div>
+                <div>${formData.aadhaar}</div>
+                
+                <div style="font-weight: 600; color: #555;">Date of Birth:</div>
+                <div>${formData.dob}</div>
+                
+                <div style="font-weight: 600; color: #555;">Employment:</div>
+                <div>${formData.employment}</div>
+                
+                <div style="font-weight: 600; color: #555;">Monthly Income:</div>
+                <div>₹${parseInt(formData.income).toLocaleString('en-IN')}</div>
+                
+                <div style="font-weight: 600; color: #555;">Preferred Bank:</div>
+                <div>${formData.preferredBank}</div>
+                
+                <div style="font-weight: 600; color: #555;">Loan Type:</div>
+                <div>${formData.loanType}</div>
+                
+                <div style="font-weight: 600; color: #555;">Loan Amount:</div>
+                <div>₹${parseInt(formData.loanAmount).toLocaleString('en-IN')}</div>
+                
+                <div style="font-weight: 600; color: #555;">Purpose:</div>
+                <div>${formData.purpose}</div>
+                
+                <div style="font-weight: 600; color: #555;">Preferred Tenure:</div>
+                <div>${formData.tenure} months</div>
+            </div>
+        `;
+    }
+    
+    function submitApplication() {
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        if(!termsCheckbox.checked) {
+            alert('Please agree to the Terms & Conditions');
+            return;
+        }
+        
+        if(!validateCurrentStep()) {
+            alert('Please complete all required fields correctly');
+            return;
+        }
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        submitBtn.disabled = true;
+        
+        const formData = {
+            name: document.getElementById('applicantName').value,
+            mobile: document.getElementById('applicantMobile').value,
+            email: document.getElementById('applicantEmail').value,
+            pan: document.getElementById('applicantPAN').value,
+            aadhaar: document.getElementById('applicantAadhaar').value,
+            dob: document.getElementById('applicantDOB').value,
+            employment: document.getElementById('employmentType').value,
+            company: document.getElementById('companyName').value,
+            income: document.getElementById('monthlyIncome').value,
+            loanType: document.getElementById('loanType').value,
+            loanAmount: document.getElementById('requiredLoanAmount').value,
+            purpose: document.getElementById('loanPurpose').value,
+            preferredBank: document.getElementById('preferredBank').value,
+            tenure: document.getElementById('preferredTenure').value
+        };
+        
+        setTimeout(() => {
+            const leadId = saveLeadToDatabase(formData);
+            generatePDF(leadId, formData);
+            
+            alert(`✅ Application submitted successfully!\n\nYour Lead ID: ${leadId}\n\nYour PDF has been downloaded.`);
+            
+            resetForm();
+            
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            showSection('home');
+            
+        }, 2000);
+    }
+    
+    function generatePDF(leadId, formData) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        const currentDate = new Date().toLocaleDateString('en-IN');
+        
+        // Header
+        doc.setFillColor(26, 35, 126);
+        doc.rect(0, 0, 210, 40, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(24);
+        doc.text('LOAN MITRA', 105, 25, { align: 'center' });
+        
+        // Application Info
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(10);
+        doc.text(`Application ID: ${leadId}`, 14, 50);
+        doc.text(`Lead ID: ${leadId}`, 14, 57);
+        doc.text(`Date: ${currentDate}`, 14, 64);
+        
+        // Personal Details Table
+        doc.autoTable({
+            startY: 70,
+            theme: 'grid',
+            head: [['PERSONAL DETAILS', '']],
+            body: [
+                ['Full Name', formData.name],
+                ['Mobile Number', formData.mobile],
+                ['Email Address', formData.email],
+                ['PAN Number', formData.pan],
+                ['Aadhaar Number', formData.aadhaar],
+                ['Date of Birth', formData.dob]
+            ],
+            headStyles: { 
+                fillColor: [26, 35, 126],
+                textColor: [255, 255, 255],
+                fontStyle: 'bold'
+            }
+        });
+        
+        // Financial Details Table
+        doc.autoTable({
+            startY: doc.lastAutoTable.finalY + 10,
+            theme: 'grid',
+            head: [['FINANCIAL DETAILS', '']],
+            body: [
+                ['Employment Type', formData.employment],
+                ['Company Name', formData.company || 'N/A'],
+                ['Monthly Income', '₹' + parseInt(formData.income).toLocaleString('en-IN')],
+                ['Annual Income', '₹' + (parseInt(formData.income) * 12).toLocaleString('en-IN')]
+            ],
+            headStyles: { 
+                fillColor: [255, 111, 0],
+                textColor: [255, 255, 255],
+                fontStyle: 'bold'
+            }
+        });
+        
+        // Loan Details Table
+        doc.autoTable({
+            startY: doc.lastAutoTable.finalY + 10,
+            theme: 'grid',
+            head: [['LOAN DETAILS', '']],
+            body: [
+                ['Loan Type', formData.loanType],
+                ['Preferred Bank', formData.preferredBank],
+                ['Loan Amount', '₹' + parseInt(formData.loanAmount).toLocaleString('en-IN')],
+                ['Purpose', formData.purpose],
+                ['Preferred Tenure', formData.tenure + ' months']
+            ],
+            headStyles: { 
+                fillColor: [76, 175, 80],
+                textColor: [255, 255, 255],
+                fontStyle: 'bold'
+            }
+        });
+        
+        // Footer
+        doc.setFontSize(9);
+        doc.setTextColor(100, 100, 100);
+        doc.text('This application has been saved in our database.', 105, 270, { align: 'center' });
+        doc.text('© 2024 Loan Mitra. All rights reserved.', 105, 275, { align: 'center' });
+        
+        // Save PDF
+        doc.save(`Loan_Mitra_Application_${leadId}.pdf`);
+    }
+    
+    function resetForm() {
+        document.getElementById('step' + currentStep).classList.remove('active');
+        document.getElementById('step' + currentStep + 'Indicator').classList.remove('active');
+        
+        currentStep = 1;
+        
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step1Indicator').classList.add('active');
+        
+        // Clear form fields
+        const fields = [
+            'applicantName', 'applicantMobile', 'applicantEmail', 'applicantPAN', 
+            'applicantAadhaar', 'applicantDOB', 'employmentType', 'companyName',
+            'monthlyIncome', 'annualIncome', 'loanType', 'requiredLoanAmount',
+            'loanPurpose', 'preferredBank', 'preferredTenure'
+        ];
+        
+        fields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if(field) {
+                field.value = '';
+            }
+        });
+        
+        document.getElementById('requiredLoanAmount').value = '1000000';
+        document.getElementById('preferredTenure').value = '120';
+        document.getElementById('termsCheckbox').checked = false;
+        
+        // Reset validation classes
+        document.querySelectorAll('.form-field').forEach(field => {
+            field.classList.remove('valid', 'invalid');
+        });
+        
+        // Hide applying banner
+        document.getElementById('applyingWithBanner').style.display = 'none';
+        
+        // Reset bank selection
+        currentSelectedBank = null;
+        currentSelectedBankType = null;
+    }
+    
+    function generateApplicationId() {
+        return 'LM-' + Date.now().toString().slice(-8);
+    }
+    
+    // WhatsApp message function
+    function sendWhatsAppMessage() {
+        const name = document.getElementById('applicantName').value || 'Customer';
+        const mobile = document.getElementById('applicantMobile').value || '';
+        const loanType = document.getElementById('loanType').value || 'Loan';
+        
+        const message = `Hello! I'm ${name}. I'm interested in ${loanType}. My mobile number is ${mobile}. Please contact me.`;
+        const encodedMessage = encodeURIComponent(message);
+        
+        window.open(`https://wa.me/919352665561?text=${encodedMessage}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
